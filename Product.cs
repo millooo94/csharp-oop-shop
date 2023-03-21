@@ -13,11 +13,11 @@ public class Product
         var randomNumber = new Random();
         Code = randomNumber.Next(10, 500);
     }
-    public int Code { get; private set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public int Code { get; private init; }
+    public string Name { get; set; } = "";
+    public string Description { get; set; } = "";
     public double Price { get; set; }
-    public long Iva { get; set; }
+    public double Iva { get; set; }
 
     public string GetUntaxedPrice()
     {
@@ -27,7 +27,7 @@ public class Product
 
     public string GetTaxedPrice()
     {
-        var taxedPrice = Math.Round(Price - (Price * 22 / 100)) + "$";
+        var taxedPrice = Math.Round(Price * (1 + Iva)) + "$";
         return taxedPrice;
     }
 
